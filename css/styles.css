@@ -1,0 +1,66 @@
+body {
+  width: 50vw;
+  margin: auto;
+  padding-top: 15vh;
+}
+
+.chip {
+  font-size: 2em;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.chip1 {
+  background-color: green;
+  top: 7em;
+  left: 10em;
+}
+
+.chip1a {
+  top: 10em;
+  left: 13em;
+}
+
+.chip1b {
+  top: 10em;
+  left: 25em;
+}
+
+.chip2 {
+  background-color: pink;
+  top: 8em;
+  left: 20em;
+}
+
+.chip2a {
+  top: 15em;
+  left: 25em;
+}
+
+.chip3 {
+  background-color: blue;
+  top: 16em;
+  left: 30em;
+}
+
+.chip3a {
+  top: 10em;
+  left: 25em;
+}
+
+.chip4 {
+  background-color: red;
+  top: 12em;
+  left: 20em;
+}
+
+.chip5 {
+  background-color: yellow;
+  top: 15em;
+  left: 15em;
+}
