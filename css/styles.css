@@ -6,6 +6,7 @@ body {
 
 .chip {
   font-size: 2em;
+  font-weight: bold;
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
