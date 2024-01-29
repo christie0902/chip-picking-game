@@ -4,26 +4,27 @@ const getRandom = (max = 1, min = 0) => {
 
 const playScreen = document.querySelector('.playScreen');
 let score = 0;
+let chipCount=0;
 
 class Game {
   constructor(numberOfChips) {
     this.chipNum = numberOfChips || 5; //default number of chips if not specified
+    chipCount = this.chipNum;
   }
 
   start(){
     for (let i =0; i < this.chipNum; i++) {
-      this.addChip(getRandom(5),getRandom(1000, 200),getRandom(1000, 200))
-    }
+      this.addChip(getRandom(5),getRandom(1000, 200),getRandom(1000, 200));
   }
-
+  }
   addChip(value, x, y) {
-      const chip = new Chip(value, x,y);
+      const chip = new Chip(value, x, y);
       chip.render();
   }
-  scoreCalc(value){
+
+  scoreCalc(value) {
     score+=value;
     this.showScore();
-    
   }
 
   showScore () {
@@ -31,15 +32,20 @@ class Game {
     lastScore.innerText = score;
   }
 
+  endGame () {
+    location.reload();
+  }
 }
 
-class Chip extends Game {
+
+class Chip{
   constructor(value,x,y) {
-    super();
+    this.chipCount = chipCount;
+    console.log(this.chipCount);
     this.value = value;
     this.x = x;
     this.y = y;
-
+    this.chipDisplay = undefined;
   }
 
   getColor(value){
@@ -58,21 +64,26 @@ class Chip extends Game {
   }
 
   render() {
-    const chip = document.createElement('div')
-    chip.style.top= this.y +"px";
-    chip.style.left = this.x + "px";
-    playScreen.appendChild(chip);
-    chip.textContent = this.value;
-    chip.classList.add("chip", this.getColor(this.value));
-    chip.addEventListener("click", this.click)
+    this.chipDisplay = document.createElement('div')
+    this.chipDisplay.style.top= this.y +"px";
+    this.chipDisplay.style.left = this.x + "px";
+    playScreen.appendChild(this.chipDisplay);
+    this.chipDisplay.textContent = this.value;
+    this.chipDisplay.classList.add("chip", this.getColor(this.value));
+    this.chipDisplay.addEventListener("click", () => this.click());
   }
 
 
   remove() {
-    this.style.display = "none";
+    playScreen.removeChild(this.chipDisplay);
+    chipCount--
+    console.log(chipCount);
+    if (chipCount=== 0) {
+      newGame.endGame ();
+    }
   }
   click() {
-    super.scoreCalc(this.value)
+    newGame.scoreCalc(this.value)
     this.remove();
   }
 }
