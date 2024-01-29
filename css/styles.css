@@ -15,7 +15,7 @@ body {
   position: absolute;
 }
 
-.chip1 {
+.green {
   background-color: green;
   top: 7em;
   left: 10em;
@@ -31,7 +31,7 @@ body {
   left: 25em;
 }
 
-.chip2 {
+.pink {
   background-color: pink;
   top: 8em;
   left: 20em;
@@ -42,7 +42,7 @@ body {
   left: 25em;
 }
 
-.chip3 {
+.blue {
   background-color: blue;
   top: 16em;
   left: 30em;
@@ -53,13 +53,13 @@ body {
   left: 25em;
 }
 
-.chip4 {
+.red {
   background-color: red;
   top: 12em;
   left: 20em;
 }
 
-.chip5 {
+.yellow {
   background-color: yellow;
   top: 15em;
   left: 15em;
