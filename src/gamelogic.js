@@ -1,57 +1,57 @@
 const getRandom = (max = 1, min = 0) => {
-  return Math.ceil(Math.random() * (max-min)) + min ;
-}
+  return Math.ceil(Math.random() * (max - min)) + min;
+};
 
-const playScreen = document.querySelector('.playScreen');
+const playScreen = document.querySelector(".playScreen");
 let score = 0;
-let chipCount=0;
+let chipCount = 0;
 
 class Game {
   constructor(numberOfChips) {
     this.chipNum = numberOfChips || 5; //default number of chips if not specified
     chipCount = this.chipNum;
+    console.log(chipCount);
   }
 
-  start(){
-    for (let i =0; i < this.chipNum; i++) {
-      this.addChip(getRandom(5),getRandom(1000, 200),getRandom(1000, 200));
-  }
+  start() {
+    for (let i = 0; i < this.chipNum; i++) {
+      this.addChip(getRandom(5), getRandom(600, 200), getRandom(500, 200));
+      console.log(this.chipCount);
+    }
   }
   addChip(value, x, y) {
-      const chip = new Chip(value, x, y);
-      chip.render();
+    const chip = new Chip(value, x, y);
+    chip.render();
   }
 
   scoreCalc(value) {
-    score+=value;
+    score += value;
     this.showScore();
   }
 
-  showScore () {
-    const lastScore = document.querySelector('.scoreValue');
+  showScore() {
+    const lastScore = document.querySelector(".scoreValue");
     lastScore.innerText = score;
   }
 
-  endGame () {
+  endGame() {
     location.reload();
   }
 }
 
-
-class Chip{
-  constructor(value,x,y) {
-    this.chipCount = chipCount;
-    console.log(this.chipCount);
+class Chip extends Game {
+  constructor(value, x, y) {
+    super(chipCount); //always add the same parameters of the parent class the same way in its constructor
     this.value = value;
     this.x = x;
     this.y = y;
     this.chipDisplay = undefined;
   }
 
-  getColor(value){
+  getColor(value) {
     switch (value) {
       case 1:
-        return  "green";
+        return "green";
       case 2:
         return "pink";
       case 3:
@@ -64,8 +64,8 @@ class Chip{
   }
 
   render() {
-    this.chipDisplay = document.createElement('div')
-    this.chipDisplay.style.top= this.y +"px";
+    this.chipDisplay = document.createElement("div");
+    this.chipDisplay.style.top = this.y + "px";
     this.chipDisplay.style.left = this.x + "px";
     playScreen.appendChild(this.chipDisplay);
     this.chipDisplay.textContent = this.value;
@@ -73,20 +73,19 @@ class Chip{
     this.chipDisplay.addEventListener("click", () => this.click());
   }
 
-
   remove() {
     playScreen.removeChild(this.chipDisplay);
-    chipCount--
+    chipCount--;
     console.log(chipCount);
-    if (chipCount=== 0) {
-      newGame.endGame ();
+    if (chipCount === 0) {
+      this.endGame();
     }
   }
   click() {
-    newGame.scoreCalc(this.value)
+    this.scoreCalc(this.value);
     this.remove();
   }
 }
 
 let newGame = new Game(6);
-newGame.start()
+newGame.start();
